@@ -138,3 +138,120 @@ body {
 header .header p {
   color: $main-color;
 }
+
+$standard-border: 2px dotted darkcyan;
+
+p {
+  border: $standard-border;
+}
+
+$breakpoints: 576px, 768px, 1024px, 1200px;
+
+$breapoints-sizes: (
+  xs: 576px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1200px,
+);
+
+// meanwhile, in JS...
+// 5 == '5' -> true :(
+// 5 === '5' -> false :)
+
+// SASS poi sa utilizzare anche gli operatori matematici, di comparazione e logici
+// ==, !=, <, >, <=, >=
+// + - * /
+
+$standard-size: 100px;
+$sum: 576px + $standard-size;
+
+// 5) MIXINS
+// un MIXIN in SASS è un blocco di regole CSS richiamabile comodamente con un singolo nome
+
+$generic-padding: 10px 20px;
+
+@mixin buttonStyles {
+  color: darkviolet;
+  background-color: black;
+  padding: $generic-padding;
+  border-radius: 20px;
+}
+
+// D R Y -> don't repeat yourself
+
+.special-button-sm {
+  @include buttonStyles;
+  width: 100px;
+}
+
+.special-button-lg {
+  @include buttonStyles;
+  width: 200px;
+}
+
+.margin-top {
+  margin-top: $main-margin;
+}
+
+// i mixin possono anche accettare parametri, come le funzioni in JS!
+
+@mixin appCustomButton($custom-width: 100px) {
+  background-color: antiquewhite;
+  color: black;
+  border-radius: 15px;
+  width: $custom-width; // 100px o 200px a seconda delle due invocazioni
+}
+
+.custom-button-sm {
+  @include appCustomButton(
+
+  ); // se non passo all'invocazione del mixin appCustomButton un valore per $custom-width,
+  // il mixin utilizzerà il valore di default alla riga 198 settato a 100px
+}
+
+.custom-button-lg {
+  @include appCustomButton(200px);
+}
+
+@mixin defaultList($display-value: 'block') {
+  display: $display-value;
+}
+
+.list {
+  // inserito display: block
+  @include defaultList();
+}
+
+.list-responsive {
+  // inserito display: block
+  @include defaultList('flex');
+}
+
+// 6) INTERPOLAZIONE
+
+@mixin fontInterpolation($property, $value) {
+  font-#{$property}: $value;
+}
+
+// all'invocazione del mixin fontInterpolation DOVETE passare i valori per i due parametri
+
+.text-big {
+  // voi vorreste ottenere la proprietà:
+  // font-size: 2em;
+  @include fontInterpolation(size, 2em);
+}
+
+.text-bold {
+  // voi vorreste ottenere la proprietà:
+  // font-weight: 700;
+  @include fontInterpolation(weight, 700);
+}
+
+@mixin test($property, $value) {
+  #{$property}: $value;
+}
+
+.testclass {
+  @include test('color', 'red');
+  // potevo semplicemente scrivere color: red :)
+}
