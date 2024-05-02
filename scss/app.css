@@ -133,4 +133,40 @@ p {
 
 .testclass {
   color: "red";
+}
+
+.text-576px {
+  max-width: 576px;
+}
+
+.text-768px {
+  max-width: 768px;
+}
+
+.text-1024px {
+  max-width: 1024px;
+}
+
+.text-1200px {
+  max-width: 1200px;
+}
+
+.margin-xs {
+  margin: 10px;
+}
+
+.margin-sm {
+  margin: 12px;
+}
+
+.margin-md {
+  margin: 15px;
+}
+
+.margin-lg {
+  margin: 18px;
+}
+
+.margin-xl {
+  margin: 36px;
 }/*# sourceMappingURL=app.css.map */

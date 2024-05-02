@@ -255,3 +255,66 @@ $generic-padding: 10px 20px;
   @include test('color', 'red');
   // potevo semplicemente scrivere color: red :)
 }
+
+// 7) CICLI
+// è possibile utilizzare anche in SASS dei cicli -> al fine di automatizzare la generazione di STILI
+// ma soprattutto anche di CLASSI
+
+$breakpoints-array: 576px, 768px, 1024px, 1200px;
+
+// quello che voglio fare è generare automaticamente delle CLASSI in css ciclando $breakpoints-array
+
+// .text-576px {
+//    font-size: 576px;
+// }
+
+// .text-768px {
+//    font-size: 768px;
+// }
+
+// .text-1024px {
+//    font-size: 1024px;
+// }
+
+// .text-1200px {
+//    font-size: 1200px;
+// }
+
+// ciclo la lista dei valori
+@each $size in $breakpoints-array {
+  // entrerò in questo ciclo 4 volte
+  // per ogni elemento di $breakpoints-array...
+  // $size rappresenta l'elemento corrente!
+  .text-#{$size} {
+    max-width: $size;
+  }
+}
+
+$margins-map: (
+  xs: 10px,
+  sm: 12px,
+  md: 15px,
+  lg: 18px,
+  xl: 36px,
+);
+
+// ciclo la mappa dei valori
+@each $size, $value in $margins-map {
+  // entrerò in questo ciclo 4 volte
+  // ad ogni ciclo $size è il NOME della proprietà (xs, md etc.) mentre $value è il valore (576px, 768px, etc.)
+  .margin-#{$size} {
+    margin: #{$value};
+  }
+
+  // ha creato ad es.
+  // .margin-xs {
+  //   margin: 10px;
+  // }
+}
+
+// 9) PARTIALS
+// SASS ci permette di lavorare su singoli, piccoli files che vanno ad occuparsi di creare gli stili
+// per porzioni della pagina
+// questo rende il lavoro più gestibile, modulare e mantenibile sul lungo termine
+
+// andiamo su style.scss
